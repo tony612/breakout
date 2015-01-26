@@ -47,6 +47,16 @@ Game.prototype.update = function () {
   });
 };
 
+var stats = new Stats();
+stats.setMode(0); // 0: fps, 1: ms
+
+// align top-left
+stats.domElement.style.position = 'absolute';
+stats.domElement.style.left = '0px';
+stats.domElement.style.top = '0px';
+
+document.body.appendChild( stats.domElement );
+
 Game.prototype.start = function () {
   this.lastUpdateTime = new Date().getTime();
 
@@ -77,7 +87,29 @@ Game.prototype.variableTimeStep = function () {
   percentageOfInterval = timeDelta / interval;
 
   this.update(percentageOfInterval);
+  stats.update();
   this.draw();
 
   this.lastUpdateTime = new Date().getTime();
+};
+
+Game.prototype.fixedTimeStep = function() {
+  var fps = 60,
+  interval = 1000 / fps,
+  updated = false;
+
+  // While we're not up to date ...
+  while (this.lastUpdateTime < new Date().getTime()) {
+    this.update();
+    updated = true;
+    // We jump at fixed intervals until we catch up to the current time.
+    this.lastUpdateTime += interval;
+  }
+
+  // No need to draw if nothing was updated
+  if (updated) {
+    stats.update();
+    this.draw();
+  }
+  updated = false;
 };
