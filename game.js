@@ -35,6 +35,8 @@ Game.keys = {
 };
 
 Game.prototype.draw = function() {
+  this.context.clearRect(0, 0, this.width, this.height);
+
   var self = this;
   this.entities.forEach(function(entity) {
     if (entity.draw) entity.draw(self.context);
