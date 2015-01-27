@@ -7,6 +7,8 @@ function Entity() {
 
   this.xVelocity = 0;
   this.yVelocity = 0;
+
+  this.color = '#fff';
 }
 
 Entity.prototype.update = function(percentage) {
@@ -16,7 +18,7 @@ Entity.prototype.update = function(percentage) {
 };
 
 Entity.prototype.draw = function(context) {
-  context.fillStyle = '#fff';
+  context.fillStyle = this.color;
   context.fillRect(this.x, this.y, this.width, this.height);
 };
 

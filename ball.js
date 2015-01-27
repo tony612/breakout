@@ -1,11 +1,12 @@
 function Ball() {
   Entity.call(this);
 
-  this.width = 20;
-  this.height = 20;
+  var width = 20;
+  this.width = width;
+  this.height = width;
 
-  this.x = game.width / 2;
-  this.y = game.height - 6 * this.height;
+  this.x = game.width / 2 - width / 2;
+  this.y = game.height - 6 * width;
 
   this.yVelocity = -10;
 }
