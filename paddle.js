@@ -3,7 +3,7 @@ function Paddle() {
 
   var width = 120;
   this.width = 120;
-  this.height = 20;
+  this.height = 18;
 
   this.x = game.width / 2 - width / 2;
   this.y = game.height - 5 * this.height;
@@ -11,3 +11,14 @@ function Paddle() {
 
 Paddle.prototype = Object.create(Entity.prototype);
 Paddle.prototype.constructor = Paddle;
+
+Paddle.prototype.update = function() {
+  Entity.prototype.update.apply(this, arguments);
+
+  if (this.intersect(game.ball)) {
+    game.ball.yVelocity *= -1;
+    return true;
+  } else {
+    return false;
+  }
+};
