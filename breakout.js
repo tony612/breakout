@@ -7,16 +7,17 @@ for (var i = 0; i < 8; i++) {
   y = 30 + i * height;
   for (var j = 0; j < 14; j++) {
     x = j * width;
-    console.log(x);
     var brick = new Brick(x, y, colors[i]);
     bricks.push(brick);
   }
 }
 
+game.bricks = bricks;
+
 game.entities = [
   game.ball = new Ball(),
   game.player = new Player()
-].concat(bricks);
+].concat(game.bricks);
 
 game.start();
 

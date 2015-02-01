@@ -11,14 +11,3 @@ function Paddle() {
 
 Paddle.prototype = Object.create(Entity.prototype);
 Paddle.prototype.constructor = Paddle;
-
-Paddle.prototype.update = function() {
-  Entity.prototype.update.apply(this, arguments);
-
-  if (this.intersect(game.ball)) {
-    game.ball.yVelocity *= -1;
-    return true;
-  } else {
-    return false;
-  }
-};

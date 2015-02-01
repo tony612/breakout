@@ -26,4 +26,23 @@ Ball.prototype.update = function() {
   if (this.y <= 0) {
     this.yVelocity *= -1;
   }
+
+  var hit = false, self = this;
+  game.entities.forEach(function(entity) {
+    if (!(entity instanceof Paddle)) { return; }
+    if (self.intersect(entity)) {
+      hit = true;
+      if (!(entity instanceof Brick)) { return; }
+      game.entities = game.entities.filter(function (el) {
+        return el !== entity;
+      });
+      entity = null;
+    }
+  });
+
+  if (self.intersect(game.player)) { hit = true; }
+
+  if (hit) {
+    this.yVelocity *= -1;
+  }
 };
